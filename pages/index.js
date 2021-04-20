@@ -12,7 +12,7 @@ export default function Home() {
         </h1>
       </main>
 
-      <footer className={styles.footer}>Powered by the people ↯</footer>
+      <footer className={styles.footer}>Powered by the people ⚘</footer>
     </div>
   );
 }
