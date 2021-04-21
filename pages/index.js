@@ -1,10 +1,13 @@
 import styles from "../styles/Home.module.css";
-import Nav from "../components/nav";
+import Nav from "../components/Nav";
+import AddToHomeScreen from "../components/AddToHomeScreen";
 
 export default function Home() {
   return (
     <div className={styles.container}>
       <Nav>Nav</Nav>
+
+      <AddToHomeScreen></AddToHomeScreen>
 
       <main className={styles.main}>
         <h1 className={styles.title}>

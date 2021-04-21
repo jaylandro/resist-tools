@@ -56,6 +56,8 @@ const Nav = () => (
       ))}
     </ul>
 
+    <button class="add-button">Add to home screen</button>
+
     <style jsx>{`
       :global(body) {
         margin: 0;
@@ -80,6 +82,11 @@ const Nav = () => (
         color: #067df7;
         text-decoration: none;
         font-size: 13px;
+      }
+      .add-button {
+        position: absolute;
+        top: 1px;
+        left: 1px;
       }
     `}</style>
   </nav>
