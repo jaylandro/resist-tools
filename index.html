@@ -40,6 +40,20 @@
       <a id="map-link" target="_blank"></a>
     </main>
     <script>
+      function shareLocation(mapLink) {
+        if (navigator.share) {
+          navigator
+            .share({
+              title: mapLink.textContent,
+              url: mapLink.href,
+            })
+            .then(() => {
+              console.log("Thanks for sharing!");
+            })
+            .catch(console.error);
+        }
+      }
+
       function geoFindMe() {
         const status = document.querySelector("#status");
         const mapLink = document.querySelector("#map-link");
@@ -56,17 +70,7 @@
           mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
           mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
 
-          if (navigator.share) {
-            navigator
-              .share({
-                title: "Location Share",
-                url: mapLink.href,
-              })
-              .then(() => {
-                console.log("Thanks for sharing!");
-              })
-              .catch(console.error);
-          }
+          shareLocation(mapLink);
         }
 
         function error() {
