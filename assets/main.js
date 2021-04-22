@@ -44,3 +44,14 @@ function geoFindMe() {
 }
 
 document.querySelector("#location-share").addEventListener("click", geoFindMe);
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/assets/sw.js")
+    .then((serviceWorker) => {
+      console.log("Service Worker registered: ", serviceWorker);
+    })
+    .catch((error) => {
+      console.error("Error registering the Service Worker: ", error);
+    });
+}
