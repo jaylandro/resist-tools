@@ -1,3 +1,7 @@
+:root {
+  --theme-color: #eb00ff;
+}
+
 html {
   height: 100%;
 }
@@ -10,7 +14,7 @@ body {
 }
 
 nav {
-  --min: 15ch;
+  --min: 10ch;
   --gap: 1rem;
 
   margin: var(--gap);
@@ -20,7 +24,7 @@ nav {
 }
 
 nav button {
-  background: rgb(14, 182, 182);
+  background: var(--theme-color);
   border: none;
   padding: 0.5em;
   border-radius: 6px;

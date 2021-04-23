@@ -1,5 +1,10 @@
 const CACHE_NAME = "resist-tools-cache";
-const urlsToCache = ["/", "/assets/global.css", "/assets/main.js"];
+const urlsToCache = [
+  "/",
+  "/index.html",
+  "/assets/global.css",
+  "/assets/main.js",
+];
 
 self.addEventListener("install", function (event) {
   // Perform install steps
