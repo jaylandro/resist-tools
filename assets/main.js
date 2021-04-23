@@ -1,10 +1,7 @@
-function shareLocation(mapLink) {
+function webShare(content) {
   if (navigator.share) {
     navigator
-      .share({
-        title: mapLink.textContent,
-        url: mapLink.href,
-      })
+      .share(content)
       .then(() => {
         console.log("Thanks for sharing!");
       })
@@ -25,10 +22,13 @@ function geoFindMe() {
     const longitude = position.coords.longitude;
 
     status.textContent = "";
-    mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+    mapLink.href = `https://www.openstreetmap.org/?mlat=${latitude}&mlon=-${longitude}&zoom=12`;
     mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
 
-    shareLocation(mapLink);
+    webShare({
+      title: `My current location is ${mapLink.textContent}`,
+      url: mapLink.href,
+    });
   }
 
   function error() {
@@ -45,6 +45,8 @@ function geoFindMe() {
 
 document.querySelector("#location-share").addEventListener("click", geoFindMe);
 
+/* Register our service worker */
+
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("/sw.js")
@@ -56,16 +58,16 @@ if ("serviceWorker" in navigator) {
     });
 }
 
-/* Handle deferred PWA install */
-
-// Code to handle install prompt on desktop
+/* Handle deferrering PWA install until user clicks install */
 
 let deferredPrompt;
 const addBtn = document.querySelector(".add-button");
 addBtn.style.display = "none";
 
 window.addEventListener("beforeinstallprompt", (e) => {
+  // Prevent Chrome 67 and earlier from automatically showing the prompt
   e.preventDefault();
+  // Stash the event so it can be triggered later.
   deferredPrompt = e;
   // Update UI to notify the user they can add to home screen
   addBtn.style.display = "block";
