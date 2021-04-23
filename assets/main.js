@@ -47,7 +47,7 @@ document.querySelector("#location-share").addEventListener("click", geoFindMe);
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
-    .register("/assets/sw.js")
+    .register("/sw.js")
     .then((serviceWorker) => {
       console.log("Service Worker registered: ", serviceWorker);
     })
