@@ -27,6 +27,7 @@ function geoFindMe() {
 
     webShare({
       title: `My current location is ${mapLink.textContent}`,
+      text: `My current location is ${mapLink.textContent}`,
       url: mapLink.href,
     });
   }
