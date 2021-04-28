@@ -18,6 +18,14 @@
       <header>
         <h1>⚘ Resist Tools</h1>
       </header>
+
+      <dialog>
+        <button id="close">close</button>
+        <output>
+          <a id="map-link" target="_blank"></a>
+        </output>
+      </dialog>
+
       <nav>
         <button id="location-share">
           location share
@@ -36,7 +44,6 @@
             />
           </svg>
           <p id="status"></p>
-          <a id="map-link" target="_blank"></a>
         </button>
         <button>
           obscureface camera
@@ -123,7 +130,9 @@
             />
           </svg>
         </button>
-        <button class="add-button">Add Resist Tools to Homescreen</button>
+        <button class="add-button" style="display: none">
+          Add Resist Tools to Homescreen
+        </button>
       </nav>
     </main>
     <script src="assets/main.js"></script>

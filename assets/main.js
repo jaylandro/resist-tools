@@ -1,4 +1,33 @@
+/**
+ * Register our service worker
+ * https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers#enter_service_workers
+ */
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/sw.js")
+    .then((serviceWorker) => {
+      console.log("Service Worker registered: ", serviceWorker);
+    })
+    .catch((error) => {
+      console.error("Error registering the Service Worker: ", error);
+    });
+}
+
+/**
+ * Generic webshare (triggers sharing options on mobile)
+ * https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share
+ *
+ */
 function webShare(content) {
+  const dialogElement = document.querySelector("dialog");
+  const cancelButton = document.getElementById("close");
+
+  cancelButton.addEventListener("click", function () {
+    dialogElement.close("");
+  });
+
+  dialogElement.showModal();
+
   if (navigator.share) {
     navigator
       .share(content)
@@ -9,6 +38,11 @@ function webShare(content) {
   }
 }
 
+/**
+ * Check if browser supports native geo-location and construct share link if it does
+ * https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API#getting_the_current_position
+ *
+ */
 function geoFindMe() {
   const status = document.querySelector("#status");
   const mapLink = document.querySelector("#map-link");
@@ -46,24 +80,12 @@ function geoFindMe() {
 
 document.querySelector("#location-share").addEventListener("click", geoFindMe);
 
-/* Register our service worker */
-
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker
-    .register("/sw.js")
-    .then((serviceWorker) => {
-      console.log("Service Worker registered: ", serviceWorker);
-    })
-    .catch((error) => {
-      console.error("Error registering the Service Worker: ", error);
-    });
-}
-
-/* Handle deferrering PWA install until user clicks install */
-
-let deferredPrompt;
+/**
+ * Handle deferrering PWA install until user clicks install
+ * https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#javascript_for_handling_the_install
+ */
 const addBtn = document.querySelector(".add-button");
-addBtn.style.display = "none";
+let deferredPrompt;
 
 window.addEventListener("beforeinstallprompt", (e) => {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
