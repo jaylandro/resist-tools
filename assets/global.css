@@ -1,5 +1,7 @@
 :root {
-  --theme-color: #eb00ff;
+  --theme-color: #000000;
+  --mono-font: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
 }
 
 html {
@@ -7,7 +9,8 @@ html {
 }
 
 body {
-  font-family: system-ui, sans-serif;
+  background: var(--theme-color);
+  font-family: var(--mono-font);
   min-height: 100%;
   font-size: 2.5em;
   margin: 0;
@@ -24,10 +27,20 @@ nav {
 }
 
 nav button {
-  background: var(--theme-color);
-  border: none;
+  border: 2px solid #ffffff;
   padding: 0.5em;
   border-radius: 6px;
   font-size: 2rem;
   cursor: pointer;
+}
+
+header {
+  background: var(--theme-color);
+  color: #ffffff;
+  padding: 0.2em 0.5em;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 0.9em;
 }
