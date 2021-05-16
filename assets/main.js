@@ -56,7 +56,7 @@ function geoFindMe() {
     const longitude = position.coords.longitude;
 
     status.textContent = "";
-    mapLink.href = `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}&zoom=12`;
+    mapLink.href = `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}&zoom=16`;
     mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
 
     webShare({
