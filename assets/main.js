@@ -23,10 +23,10 @@ function webShare(content) {
   const cancelButton = document.getElementById("close");
 
   cancelButton.addEventListener("click", function () {
-    dialogElement.close("");
+    dialogElement.style.display = "none";
   });
 
-  dialogElement.showModal();
+  dialogElement.style.display = "block";
 
   if (navigator.share) {
     navigator
