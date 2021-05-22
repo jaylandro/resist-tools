@@ -6,7 +6,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("/sw.js")
     .then((serviceWorker) => {
-      console.log("Service Worker registered: ", serviceWorker);
+      // console.log("Service Worker registered: ", serviceWorker);
     })
     .catch((error) => {
       console.error("Error registering the Service Worker: ", error);
@@ -44,36 +44,38 @@ function webShare(content) {
  *
  */
 function geoFindMe() {
-  const status = document.querySelector("#status");
+  const status = document.querySelector(".status-title");
   const mapLink = document.querySelector("#map-link");
 
   mapLink.href = "";
   mapLink.textContent = "";
 
   function success(position) {
-    console.log("Success", position);
+    console.log("success", position);
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
     status.textContent = "";
-    mapLink.href = `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}&zoom=16`;
+    mapLink.href = `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}&zoom=17`;
     mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
 
+    status.textContent = "private share location";
+
     webShare({
-      title: `My current location is ${mapLink.textContent}`,
-      text: `My current location is ${mapLink.textContent}`,
+      title: `my current location is ${mapLink.textContent}`,
+      text: `my current location is ${mapLink.textContent}`,
       url: mapLink.href,
     });
   }
 
   function error() {
-    status.textContent = "Unable to retrieve your location";
+    status.textContent = "unable to retrieve your location";
   }
 
   if (!navigator.geolocation) {
-    status.textContent = "Geolocation is not supported by your browser";
+    status.textContent = "geolocation is not supported by your browser";
   } else {
-    status.textContent = "Locating…";
+    status.textContent = "locating (no server)…";
     navigator.geolocation.getCurrentPosition(success, error);
   }
 }
@@ -84,6 +86,7 @@ document.querySelector("#location-share").addEventListener("click", geoFindMe);
  * Handle deferrering PWA install until user clicks install
  * https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#javascript_for_handling_the_install
  */
+
 const addBtn = document.querySelector(".add-button");
 let deferredPrompt;
 

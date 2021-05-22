@@ -1,5 +1,6 @@
 :root {
   --theme-color: #000000;
+  --font-color: #eff;
   --mono-font: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
     monospace;
 }
@@ -16,37 +17,55 @@ body {
   margin: 0;
 }
 
-nav {
-  --min: 10ch;
-  --gap: 1rem;
-
-  margin: var(--gap);
-  display: grid;
-  grid-gap: var(--gap);
-  grid-template-columns: repeat(auto-fit, minmax(var(--min), 1fr));
-}
-
-nav button {
-  border: 2px solid #ffffff;
-  padding: 0.5em;
-  border-radius: 6px;
-  font-size: 2rem;
-  cursor: pointer;
+main {
+  max-width: 60rem;
+  margin: 0 auto;
 }
 
 header {
   background: var(--theme-color);
-  color: #ffffff;
+  color: var(--font-color);
   padding: 0.2em 0.5em;
 }
 
 header h1 {
-  margin: 0;
+  margin: 0.5em 0;
   font-size: 0.9em;
+}
+
+nav {
+  --gap: 1rem;
+
+  margin: var(--gap);
+}
+
+nav button {
+  border: 2px solid var(--font-color);
+  padding: 0.5em;
+  border-radius: 6px;
+  font-size: 2rem;
+  cursor: pointer;
+  display: block;
+  text-align: left;
+  min-width: 100%;
+  background: none;
+  color: var(--font-color);
+  margin-bottom: 2rem;
+}
+
+nav button svg {
+  width: 3.5rem;
+  fill: var(--font-color);
+  vertical-align: middle;
+}
+
+.status-title {
+  padding-top: 3px;
 }
 
 dialog {
   padding-top: 2em;
+  background-color: var(--font-color);
 }
 
 dialog #close {
@@ -55,8 +74,8 @@ dialog #close {
   right: 6px;
   cursor: pointer;
   background: dodgerblue;
-  color: white;
-  font-size: 1.2em;
+  color: var(--font-color);
+  font-size: 1em;
   border: none;
   border-radius: 6px;
   padding: 0.1em 0.3em;
