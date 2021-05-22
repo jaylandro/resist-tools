@@ -75,7 +75,7 @@ function geoFindMe() {
   if (!navigator.geolocation) {
     status.textContent = "geolocation is not supported by your browser";
   } else {
-    status.textContent = "locating (no server)…";
+    status.textContent = "browser getting gps…";
     navigator.geolocation.getCurrentPosition(success, error);
   }
 }
