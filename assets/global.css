@@ -3,6 +3,7 @@
   --font-color: #eff;
   --mono-font: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
     monospace;
+  --system-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 html {
@@ -15,6 +16,10 @@ body {
   min-height: 100%;
   font-size: 2.5em;
   margin: 0;
+}
+
+input, button, a {
+  font-family: var(--system-font);
 }
 
 main {
@@ -39,7 +44,7 @@ nav {
   margin: var(--gap);
 }
 
-nav button {
+nav button, nav a {
   border: 2px solid var(--font-color);
   padding: 0.5em;
   border-radius: 6px;
@@ -51,12 +56,14 @@ nav button {
   background: none;
   color: var(--font-color);
   margin-bottom: 2rem;
+  text-decoration: none;
 }
 
-nav button svg {
+nav button svg, nav a svg {
   width: 3.5rem;
   fill: var(--font-color);
   vertical-align: middle;
+  margin-right: 1rem;
 }
 
 .status-title {

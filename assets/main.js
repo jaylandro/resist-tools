@@ -83,6 +83,14 @@ function geoFindMe() {
 document.querySelector("#location-share").addEventListener("click", geoFindMe);
 
 /**
+ * Generate random IDs for jitsi meet urls
+ */
+
+const randoString = () => Math.random().toString(36).substr(2, 9);
+
+window.document.randomId = randoString;
+
+/**
  * Handle deferrering PWA install until user clicks install
  * https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen#javascript_for_handling_the_install
  */
