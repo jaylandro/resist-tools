@@ -4,6 +4,7 @@
   --mono-font: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
     monospace;
   --system-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --gap: 1rem;
 }
 
 html {
@@ -39,8 +40,6 @@ header h1 {
 }
 
 nav {
-  --gap: 1rem;
-
   margin: var(--gap);
 }
 
