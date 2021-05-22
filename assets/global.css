@@ -14,9 +14,9 @@ html {
 body {
   background: var(--theme-color);
   font-family: var(--mono-font);
-  min-height: 100%;
   font-size: 2.5em;
   margin: 0;
+  min-height: 100%;
 }
 
 input, button, a {
@@ -44,25 +44,26 @@ nav {
 }
 
 nav button, nav a {
-  border: 2px solid var(--font-color);
-  padding: 0.5em;
+  background: none;
   border-radius: 6px;
-  font-size: 2rem;
+  border: 2px solid var(--font-color);
+  box-sizing: border-box;
+  color: var(--font-color);
   cursor: pointer;
   display: block;
-  text-align: left;
-  min-width: 100%;
-  background: none;
-  color: var(--font-color);
+  font-size: 2rem;
   margin-bottom: 2rem;
+  min-width: 100%;
+  padding: 0.5em;
+  text-align: left;
   text-decoration: none;
 }
 
 nav button svg, nav a svg {
-  width: 3.5rem;
   fill: var(--font-color);
-  vertical-align: middle;
   margin-right: 1rem;
+  vertical-align: middle;
+  width: 3.5rem;
 }
 
 .status-title {
@@ -70,19 +71,19 @@ nav button svg, nav a svg {
 }
 
 dialog {
-  padding-top: 2em;
   background-color: var(--font-color);
+  padding-top: 2em;
 }
 
 dialog #close {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  cursor: pointer;
   background: dodgerblue;
-  color: var(--font-color);
-  font-size: 1em;
-  border: none;
   border-radius: 6px;
+  border: none;
+  color: var(--font-color);
+  cursor: pointer;
+  font-size: 1em;
   padding: 0.1em 0.3em;
+  position: absolute;
+  right: 6px;
+  top: 6px;
 }
