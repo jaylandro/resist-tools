@@ -59,7 +59,7 @@ function geoFindMe() {
     mapLink.href = `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}&zoom=17`;
     mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
 
-    status.textContent = "private share location";
+    status.textContent = "dm location";
 
     webShare({
       title: `my current location is ${mapLink.textContent}`,
