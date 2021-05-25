@@ -7,8 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>resist.tools - obscureface cam</title>
 
-    <script src="/js/tracking-min.js"></script>
-    <script src="/js/face-min.js"></script>
+    <script src="/obscurecam/js/tracking-min.js"></script>
+    <script src="/obscurecam/js/face-min.js"></script>
+
+    <style>
+        body {
+            background: black;
+            display: grid;
+            place-items: center;
+        }
+
+        a {
+            color: white;
+            margin: 1em;
+            padding: 0.5em 1em;
+            border: 1px solid white;
+            font-family: monospace;
+        }
+
+        #pixelcanvas {
+            margin: 0 auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,7 +38,9 @@
         Download
     </a>
     
-    <img id="img" src="assets/faces.jpg" style="display: none" />
+    <a href="/">Back to home</a>
+    
+    <img id="img" src="/obscurecam/assets/faces1.jpg" style="display: none" />
 
     <script>
         window.onload = function () {
