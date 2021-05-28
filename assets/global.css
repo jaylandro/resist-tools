@@ -36,6 +36,10 @@ main {
   padding: var(--gap);
 }
 
+video {
+  width: 100%;
+}
+
 header {
   background: var(--theme-color);
   color: var(--font-color);

@@ -9,12 +9,15 @@
 
   <link rel="stylesheet" href="/assets/global.css" />
 
-  <script async src="js/tracking-min.js"></script>
-  <script async src="js/face-min.js"></script>
+  <script src="js/tracking-min.js"></script>
+  <script src="js/face-min.js"></script>
+  <script async src="js/obscurecam.js"></script>
 </head>
 
 <body>
-  <canvas id="pixelcanvas"></canvas>
+  <canvas id="pixelcanvas" width="100%" height="100%"></canvas>
+  <video playsinline autoplay></video>
+  <button class="take-picture">Take picture</button>
 
   <div class="page-nav">
     <a download="safetyfirst.jpg" href="" onclick="downloadImg(this)">
@@ -25,46 +28,6 @@
   </div>
 
   <img id="img" src="/obscurecam/assets/crowd.jpg" style="display: none" />
-
-  <script>
-    window.onload = function () {
-      const img = document.getElementById('img');
-      const canvas = document.getElementById('pixelcanvas');
-      const context = canvas.getContext('2d');
-      const scale = 0.7 / 10;
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const scw = canvas.width * scale;
-      const sch = canvas.height * scale;
-
-      context.drawImage(img, 0, 0);
-      context.imageSmoothingEnabled = false;
-      context.drawImage(img, 0, 0, scw, sch);
-
-      const tracker = new tracking.ObjectTracker(['face']);
-      tracker.setStepSize(1.7);
-      tracking.track('#img', tracker);
-
-      tracker.on('track', (event) => {
-        if (!event.data) return;
-
-        event.data.forEach((rect) => {
-          window.plot(rect.x, rect.y, rect.width, rect.height);
-        });
-
-        context.drawImage(img, 0, 0, scw, sch, 0, 0, scw, sch);
-      });
-
-      window.plot = (x, y, w, h) => {
-        context.drawImage(canvas, (x * scale), (y * scale), (w * scale), (h * scale), x, y, w, h + 10);
-      };
-
-      window.downloadImg = (el) => {
-        const image = canvas.toDataURL("image/jpg");
-        el.href = image;
-      };
-    };
-  </script>
 </body>
 
 </html>
