@@ -2,85 +2,69 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>resist.tools - obscureface cam</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>resist.tools - obscureface cam</title>
 
-    <script src="/obscurecam/js/tracking-min.js"></script>
-    <script src="/obscurecam/js/face-min.js"></script>
+  <link rel="stylesheet" href="/assets/global.css" />
 
-    <style>
-        body {
-            background: black;
-            display: grid;
-            place-items: center;
-        }
-
-        a {
-            color: white;
-            margin: 1em;
-            padding: 0.5em 1em;
-            border: 1px solid white;
-            font-family: monospace;
-        }
-
-        #pixelcanvas {
-            margin: 0 auto;
-        }
-    </style>
+  <script async src="js/tracking-min.js"></script>
+  <script async src="js/face-min.js"></script>
 </head>
 
 <body>
-    <canvas id="pixelcanvas"></canvas>
+  <canvas id="pixelcanvas"></canvas>
 
+  <div class="page-nav">
     <a download="safetyfirst.jpg" href="" onclick="downloadImg(this)">
-        Download
+      Download
     </a>
-    
+
     <a href="/">Back to home</a>
-    
-    <img id="img" src="/obscurecam/assets/faces1.jpg" style="display: none" />
+  </div>
 
-    <script>
-        window.onload = function () {
-            const img = document.getElementById('img');
-            const canvas = document.getElementById('pixelcanvas');
-            const context = canvas.getContext('2d');
-            const scale = 0.7 / 10;
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const scw = canvas.width * scale;
-            const sch = canvas.height * scale;
+  <img id="img" src="/obscurecam/assets/crowd.jpg" style="display: none" />
 
-            context.drawImage(img, 0, 0);
-            context.imageSmoothingEnabled = false;
-            context.drawImage(img, 0, 0, scw, sch);
+  <script>
+    window.onload = function () {
+      const img = document.getElementById('img');
+      const canvas = document.getElementById('pixelcanvas');
+      const context = canvas.getContext('2d');
+      const scale = 0.7 / 10;
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const scw = canvas.width * scale;
+      const sch = canvas.height * scale;
 
-            const tracker = new tracking.ObjectTracker(['face']);
-            tracker.setStepSize(1.7);
-            tracking.track('#img', tracker);
+      context.drawImage(img, 0, 0);
+      context.imageSmoothingEnabled = false;
+      context.drawImage(img, 0, 0, scw, sch);
 
-            tracker.on('track', (event) => {
-                if (!event.data) return;
+      const tracker = new tracking.ObjectTracker(['face']);
+      tracker.setStepSize(1.7);
+      tracking.track('#img', tracker);
 
-                event.data.forEach((rect) => {
-                    window.plot(rect.x, rect.y, rect.width, rect.height);
-                });
+      tracker.on('track', (event) => {
+        if (!event.data) return;
 
-                context.drawImage(img, 0, 0, scw, sch, 0, 0, scw, sch);
-            });
+        event.data.forEach((rect) => {
+          window.plot(rect.x, rect.y, rect.width, rect.height);
+        });
 
-            window.plot = (x, y, w, h) => {
-                context.drawImage(canvas, (x * scale), (y * scale), (w * scale), (h * scale), x, y, w, h + 10);
-            };
+        context.drawImage(img, 0, 0, scw, sch, 0, 0, scw, sch);
+      });
 
-            window.downloadImg = (el) => {
-                const image = canvas.toDataURL("image/jpg");
-                el.href = image;
-            };
-        };
-    </script>
+      window.plot = (x, y, w, h) => {
+        context.drawImage(canvas, (x * scale), (y * scale), (w * scale), (h * scale), x, y, w, h + 10);
+      };
+
+      window.downloadImg = (el) => {
+        const image = canvas.toDataURL("image/jpg");
+        el.href = image;
+      };
+    };
+  </script>
 </body>
 
 </html>

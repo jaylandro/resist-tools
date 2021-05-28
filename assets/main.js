@@ -19,15 +19,6 @@ if ("serviceWorker" in navigator) {
  *
  */
 function webShare(content) {
-  const dialogElement = document.querySelector("dialog");
-  const cancelButton = document.getElementById("close");
-
-  cancelButton.addEventListener("click", function () {
-    dialogElement.style.display = "none";
-  });
-
-  dialogElement.style.display = "block";
-
   if (navigator.share) {
     navigator
       .share(content)
@@ -37,68 +28,6 @@ function webShare(content) {
       .catch(console.error);
   }
 }
-
-
-/**
- * Copy to cliboard functionality
- */
- const copyToClipboardBtn = document.querySelector('.copy-to-clipboard'); 
-
- copyToClipboardBtn.addEventListener('click', () => {  
-   var mapLink = document.querySelector('#map-link');   
- 
-   try {  
-     var successful = navigator.clipboard.writeText(mapLink.getAttribute('href')); 
-
-     console.log('Copy email command was ' + (successful ? 'successful' : 'unsuccessful'));  
-   } catch(err) {  
-     console.log('Oops, unable to copy');  
-   }  
- });
-
-/**
- * Check if browser supports native geo-location and construct share link if it does
- * https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API#getting_the_current_position
- *
- */
-function geoFindMe() {
-  const status = document.querySelector(".status-title");
-  const mapLink = document.querySelector("#map-link");
-
-  mapLink.href = "";
-  mapLink.textContent = "";
-
-  function success(position) {
-    console.log("success", position);
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-
-    status.textContent = "";
-    mapLink.href = `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}&zoom=17`;
-    mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
-
-    status.textContent = "dm location";
-
-    webShare({
-      title: `my current location is ${mapLink.textContent}`,
-      text: `my current location is ${mapLink.textContent}`,
-      url: mapLink.href,
-    });
-  }
-
-  function error() {
-    status.textContent = "unable to retrieve your location";
-  }
-
-  if (!navigator.geolocation) {
-    status.textContent = "geolocation is not supported by your browser";
-  } else {
-    status.textContent = "browser getting gps…";
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
-}
-
-document.querySelector("#location-share").addEventListener("click", geoFindMe);
 
 /**
  * Generate random IDs for jitsi meet urls
