@@ -1,6 +1,7 @@
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 const tempImage = document.getElementById("temp-image");
+const imgInput = document.getElementById("image-input");
 const video = document.querySelector('video');
 const scale = 0.07;
 const constraints = {
@@ -37,43 +38,39 @@ function pixelateFaces() {
   });
 };
 
-const imgInput = document.getElementById("image-input");
-
 imgInput.addEventListener("change", function (e) {
-  if (e.target.files) {
+  if (e.target.files.length) {
     const imageFile = e.target.files[0];
     const reader = new FileReader();
 
     reader.readAsDataURL(imageFile);
 
-    reader.onloadend = function (e) {
+    reader.onloadend = (e) => {
       tempImage.src = e.target.result;
-
-      tempImage.onload = function (ev) {
-        pixelateFaces();
-      };
     };
   }
 });
 
-function takePhoto(video) {
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
+// function takePhoto(video) {
+//   canvas.width = video.videoWidth;
+//   canvas.height = video.videoHeight;
 
-  context.drawImage(video, 0, 0);
-  const dataURL = canvas.toDataURL('image/jpeg', 1.0);
-  tempImage.src = dataURL;
-}
+//   context.drawImage(video, 0, 0);
+//   const dataURL = canvas.toDataURL('image/jpeg', 1.0);
+//   tempImage.src = dataURL;
+// }
 
-navigator.mediaDevices.getUserMedia(constraints)
-  .then(stream => {
-    window.stream = stream;
-    video.srcObject = stream;
-  }).catch(error => {
-    console.error('navigator.MediaDevices.getUserMedia error: ', error.message, error.name);
-  });
+// navigator.mediaDevices.getUserMedia(constraints)
+//   .then(stream => {
+//     window.stream = stream;
+//     video.srcObject = stream;
+//   }).catch(error => {
+//     console.error('navigator.MediaDevices.getUserMedia error: ', error.message, error.name);
+//   });
 
-document.querySelector('.take-picture').onclick = () => takePhoto(video);
+// document.querySelector('.take-picture').onclick = () => takePhoto(video);
+
+tempImage.onload = () => pixelateFaces();
 
 window.downloadImg = (el) => {
   const image = canvas.toDataURL('image/jpeg', 1.0);

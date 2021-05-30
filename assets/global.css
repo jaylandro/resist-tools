@@ -20,6 +20,9 @@ body {
   margin: 0;
   min-height: 100%;
   padding-bottom: 3em;
+  display: grid;
+  place-content: center;
+  box-sizing: border-box;
 }
 
 a {
@@ -34,10 +37,6 @@ main {
   max-width: 60rem;
   margin: 0 auto;
   padding: var(--gap);
-}
-
-video {
-  width: 100%;
 }
 
 header {
@@ -90,7 +89,7 @@ nav button svg, nav a svg {
   margin-right: 0.3em;
   font-size: 0.6em;
   background: var(--accent-color);
-  color: #eff;
+  color: var(--theme-color);
   border: none;
   padding: 0.5em 1.5em;
   font-weight: bold;
@@ -109,5 +108,19 @@ canvas {
 }
 
 #temp-image {
+  display: none;
+}
+
+label[for="image-input"] {
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+
+#image-input {
+  display: none;
+}
+
+#temp-image[src] ~ label[for=image-input] {
   display: none;
 }
