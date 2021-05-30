@@ -2,12 +2,7 @@ const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 const tempImage = document.getElementById("temp-image");
 const imgInput = document.getElementById("image-input");
-const video = document.querySelector('video');
 const scale = 0.07;
-const constraints = {
-  audio: false,
-  video: true
-};
 
 function pixelateFaces() {
   const tracker = new tracking.ObjectTracker('face');
@@ -37,8 +32,6 @@ function pixelateFaces() {
     context.drawImage(tempImage, 0, 0, scaledW, scaledH, 0, 0, scaledW, scaledH);
   });
 };
-
-alert(window.devicePixelRatio)
 
 imgInput.addEventListener("change", function (e) {
   if (e.target.files.length) {
