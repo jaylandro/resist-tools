@@ -89,6 +89,11 @@ nav button svg, nav a svg {
   min-width: unset;
   margin-right: 0.3em;
   font-size: 0.6em;
+  background: var(--accent-color);
+  color: #eff;
+  border: none;
+  padding: 0.5em 1.5em;
+  font-weight: bold;
 }
 
 .status-title {
@@ -100,5 +105,9 @@ canvas {
   padding: 0;
   margin: auto;
   display: block;
-  width: 100%;
+  /* width: 100%; */
+}
+
+#temp-image {
+  display: none;
 }

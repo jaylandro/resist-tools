@@ -1,70 +1,81 @@
+const canvas = document.getElementById('canvas');
+const context = canvas.getContext('2d');
+const tempImage = document.getElementById("temp-image");
 const video = document.querySelector('video');
-const loadedimg = document.getElementById('img');
-const canvas = document.getElementById('pixelcanvas');
-
-function pixelateFaces(img) {
-  const context = canvas.getContext('2d');
-  const scale = 0.7 / 10;
-  canvas.width = img.width;
-  canvas.height = img.height;
-  const scw = canvas.width * scale;
-  const sch = canvas.height * scale;
-  context.drawImage(img, 0, 0);
-  context.imageSmoothingEnabled = false;
-  context.drawImage(img, 0, 0, scw, sch);
-
-  const tracker = new tracking.ObjectTracker(['face']);
-  tracker.setStepSize(1.7);
-  tracking.track('#img', tracker);
-
-  tracker.on('track', (event) => {
-    if (!event.data) return;
-
-    event.data.forEach((rect) => {
-      window.plot(rect.x, rect.y, rect.width, rect.height);
-    });
-
-    context.drawImage(img, 0, 0, scw, sch, 0, 0, scw, sch);
-  });
-
-  window.plot = (x, y, w, h) => {
-    context.drawImage(canvas, (x * scale), (y * scale), (w * scale), (h * scale), x, y, w, h + 10);
-  };
-
-  window.downloadImg = (el) => {
-    const image = canvas.toDataURL("image/jpg");
-    el.href = image;
-  };
-};
-
+const scale = 0.07;
 const constraints = {
   audio: false,
-  video: {
-    width: { ideal: 4096 },
-    height: { ideal: 2160 } 
+  video: true
+};
+
+function pixelateFaces() {
+  const tracker = new tracking.ObjectTracker('face');
+
+  canvas.width = tempImage.width;
+  canvas.height = tempImage.height;
+
+  const scaledW = canvas.width * scale;
+  const scaledH = canvas.height * scale;
+
+  tracker.setInitialScale(4);
+  tracker.setStepSize(2);
+  tracker.setEdgesDensity(0.1);
+
+  tracking.track('#temp-image', tracker);
+
+  tracker.on('track', function (event) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(tempImage, 0, 0);
+    context.imageSmoothingEnabled = false;
+    context.drawImage(tempImage, 0, 0, scaledW, scaledH);
+
+    event.data.forEach(function (rect) {
+      context.drawImage(canvas, (rect.x * scale), (rect.y * scale), (rect.width * scale), (rect.height * scale), rect.x, rect.y, rect.width, rect.height + 10);
+    });
+
+    context.drawImage(tempImage, 0, 0, scaledW, scaledH, 0, 0, scaledW, scaledH);
+  });
+};
+
+const imgInput = document.getElementById("image-input");
+
+imgInput.addEventListener("change", function (e) {
+  if (e.target.files) {
+    const imageFile = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.readAsDataURL(imageFile);
+
+    reader.onloadend = function (e) {
+      tempImage.src = e.target.result;
+
+      tempImage.onload = function (ev) {
+        pixelateFaces();
+      };
+    };
   }
-};
+});
 
-function handleSuccess(stream) {
-  window.stream = stream; // make stream available to browser console
-  video.srcObject = stream;
+function takePhoto(video) {
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+
+  context.drawImage(video, 0, 0);
+  const dataURL = canvas.toDataURL('image/jpeg', 1.0);
+  tempImage.src = dataURL;
 }
 
-function handleError(error) {
-  console.log('navigator.MediaDevices.getUserMedia error: ', error.message, error.name);
-}
+navigator.mediaDevices.getUserMedia(constraints)
+  .then(stream => {
+    window.stream = stream;
+    video.srcObject = stream;
+  }).catch(error => {
+    console.error('navigator.MediaDevices.getUserMedia error: ', error.message, error.name);
+  });
 
-navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError);
+document.querySelector('.take-picture').onclick = () => takePhoto(video);
 
-const button = document.querySelector('.take-picture');
-
-button.onclick = function() {
-  // canvas.width = video.videoWidth;
-  // canvas.height = video.videoHeight;
-  // canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-  // pixelateFaces(video)
+window.downloadImg = (el) => {
+  const image = canvas.toDataURL('image/jpeg', 1.0);
+  el.href = image;
 };
-
-document.addEventListener('DOMContentLoaded', () => {
-  pixelateFaces(loadedimg);
-})
