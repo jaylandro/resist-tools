@@ -6,7 +6,6 @@ const scale = 0.07;
 
 function pixelateFaces() {
   const tracker = new tracking.ObjectTracker('face');
-
   canvas.width = tempImage.width;
   canvas.height = tempImage.height;
 
@@ -20,6 +19,9 @@ function pixelateFaces() {
   tracking.track('#temp-image', tracker);
 
   tracker.on('track', function (event) {
+    if( event.data === undefined ) return;
+    
+    console.log('tracked', event.data)
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(tempImage, 0, 0);
     context.imageSmoothingEnabled = false;
@@ -43,7 +45,6 @@ imgInput.addEventListener("change", function (e) {
     reader.onloadend = (e) => {
       tempImage.onload = () => pixelateFaces();
       tempImage.src = e.target.result;
-      pixelateFaces();
     };
   }
 });
