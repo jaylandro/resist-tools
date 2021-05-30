@@ -21,7 +21,7 @@ body {
   min-height: 100%;
   padding-bottom: 3em;
   display: grid;
-  place-content: center;
+  /* place-content: center; */
   box-sizing: border-box;
 }
 
@@ -34,6 +34,8 @@ input, button, a {
 }
 
 main {
+  /* min-width: 100%; */
+  width: 100%;
   max-width: 60rem;
   margin: 0 auto;
   padding: var(--gap);
@@ -102,14 +104,11 @@ nav button svg, nav a svg {
 
 canvas {
   padding: 0;
-  margin: auto;
-  display: block;
-  /* width: 100%; */
 }
 
-#temp-image {
+/* #temp-image {
   display: none;
-}
+} */
 
 label[for="image-input"] {
   display: block;

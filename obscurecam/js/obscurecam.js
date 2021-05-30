@@ -51,25 +51,6 @@ imgInput.addEventListener("change", function (e) {
   }
 });
 
-// function takePhoto(video) {
-//   canvas.width = video.videoWidth;
-//   canvas.height = video.videoHeight;
-
-//   context.drawImage(video, 0, 0);
-//   const dataURL = canvas.toDataURL('image/jpeg', 1.0);
-//   tempImage.src = dataURL;
-// }
-
-// navigator.mediaDevices.getUserMedia(constraints)
-//   .then(stream => {
-//     window.stream = stream;
-//     video.srcObject = stream;
-//   }).catch(error => {
-//     console.error('navigator.MediaDevices.getUserMedia error: ', error.message, error.name);
-//   });
-
-// document.querySelector('.take-picture').onclick = () => takePhoto(video);
-
 tempImage.onload = () => pixelateFaces();
 
 window.downloadImg = (el) => {
