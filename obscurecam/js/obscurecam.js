@@ -31,12 +31,14 @@ function pixelateFaces() {
     context.drawImage(tempImage, 0, 0, scaledW, scaledH);
 
     event.data.forEach(function (rect) {
-      context.drawImage(canvas, (rect.x * scale), (rect.y * scale), (rect.width * scale), (rect.height * scale), rect.x, rect.y, rect.width, rect.height + 10);
+      context.drawImage(canvas, (rect.x * scale), (rect.y * scale), (rect.width * scale), (rect.height * scale), rect.x, rect.y, rect.width, rect.height + 25);
     });
 
     context.drawImage(tempImage, 0, 0, scaledW, scaledH, 0, 0, scaledW, scaledH);
   });
 };
+
+alert(window.devicePixelRatio)
 
 imgInput.addEventListener("change", function (e) {
   if (e.target.files.length) {
