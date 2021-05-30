@@ -2,11 +2,12 @@ const CACHE_NAME = "resist-tools-cache";
 const urlsToCache = [
   "/",
   "/index.html",
-  "/obscurecam/index.html",
+  "/privacypix/index.html",
   "/assets/global.css",
   "/assets/main.js",
-  "/obscurecam/js/tracking-min.js",
-  "/obscurecam/js/face-min.js"
+  "/privacypix/js/tracking-min.js",
+  "/privacypix/js/face-min.js",
+  "/privacypix/js/privacypix.js"
 ];
 
 self.addEventListener("install", function (event) {
