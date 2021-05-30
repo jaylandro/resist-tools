@@ -38,6 +38,7 @@ main {
   max-width: 50ch;
   margin: 0 auto;
   padding: var(--gap);
+  text-align: center;
 }
 
 header {
@@ -49,6 +50,7 @@ header {
 h1 {
   margin: 0 0 0.5em 0;
   font-size: 1.4em;
+  text-align: left;
 }
 
 nav button, nav a, .page-nav button, .page-nav a {
@@ -97,8 +99,9 @@ nav button svg, nav a svg {
 }
 
 .status-title {
-  padding-top: 3px;
+  padding-top: 3em;
   color: var(--font-color);
+  text-align: center;
 }
 
 canvas {
@@ -121,6 +124,6 @@ label[for="image-input"] {
   display: none;
 }
 
-#temp-image[src] ~ label[for=image-input] {
+/* #temp-image[src] ~ label[for=image-input] {
   display: none;
-}
+} */
