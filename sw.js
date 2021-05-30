@@ -2,9 +2,13 @@ const CACHE_NAME = "resist-tools-cache";
 const urlsToCache = [
   "/",
   "/index.html",
-  "/privacypix/index.html",
   "/assets/global.css",
   "/assets/main.js",
+  "/sharelocation/",
+  "/sharelocation/index.html",
+  "/sharelocation/js/sharelocation.js",
+  "/privacypix/",
+  "/privacypix/index.html",
   "/privacypix/js/tracking-min.js",
   "/privacypix/js/face-min.js",
   "/privacypix/js/privacypix.js"
