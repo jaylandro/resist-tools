@@ -19,7 +19,7 @@ function geoFindMe() {
     mapLink.href = `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}&zoom=17`;
     mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
 
-    status.textContent = "📍 your current location is";
+    status.textContent = "your current 📍 location is";
 
     window.currentLocation = mapLink;
   }
