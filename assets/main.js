@@ -20,12 +20,15 @@ if ("serviceWorker" in navigator) {
  */
 function webShare(content) {
   if (navigator.share) {
+    console.log("SHARRRING")
     navigator
       .share(content)
       .then(() => {
         console.log("Thanks for sharing!");
       })
       .catch(console.error);
+  } else {
+    document.querySelector('.dm-share').style.display = "none";
   }
 }
 

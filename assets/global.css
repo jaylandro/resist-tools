@@ -34,9 +34,8 @@ input, button, a {
 }
 
 main {
-  /* min-width: 100%; */
-  width: 100%;
-  max-width: 60rem;
+  width: calc(100% - 2em);
+  max-width: 50ch;
   margin: 0 auto;
   padding: var(--gap);
 }
