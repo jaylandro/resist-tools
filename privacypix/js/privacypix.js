@@ -41,12 +41,11 @@ imgInput.addEventListener("change", function (e) {
     reader.readAsDataURL(imageFile);
 
     reader.onloadend = (e) => {
+      tempImage.onload = () => pixelateFaces();
       tempImage.src = e.target.result;
     };
   }
 });
-
-tempImage.onload = () => pixelateFaces();
 
 window.downloadImg = (el) => {
   const image = canvas.toDataURL('image/jpeg', 1.0);

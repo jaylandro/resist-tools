@@ -30,7 +30,7 @@ function webShare(content) {
   }
 }
 
-window.onload = () =>  !navigator.share && document.querySelector('.dm-share') && (document.querySelector('.dm-share').style.display = "none");
+window.onload = () => !navigator.share && document.querySelector('.dm-share') && (document.querySelector('.dm-share').style.display = "none");
 
 /**
  * Generate random IDs for jitsi meet urls
