@@ -52,3 +52,11 @@ window.downloadImg = (el) => {
   const image = canvas.toDataURL('image/jpeg', 1.0);
   el.href = image;
 };
+
+document.querySelector('.dm-share').addEventListener('click', () => {
+  webShare({
+    title: `Obscure cam - resist.tools`,
+    text: `Safely sharing a photo`,
+    files: [canvas.toDataURL('image/jpeg', 1.0)]
+  });
+})
