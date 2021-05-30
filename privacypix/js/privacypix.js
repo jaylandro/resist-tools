@@ -43,6 +43,7 @@ imgInput.addEventListener("change", function (e) {
     reader.onloadend = (e) => {
       tempImage.onload = () => pixelateFaces();
       tempImage.src = e.target.result;
+      pixelateFaces();
     };
   }
 });
