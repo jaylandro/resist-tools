@@ -105,14 +105,15 @@ canvas {
   padding: 0;
 }
 
-/* #temp-image {
+#temp-image {
   display: none;
-} */
+}
 
 label[for="image-input"] {
   display: block;
   text-align: center;
   cursor: pointer;
+  margin-top: 3em;
 }
 
 #image-input {
