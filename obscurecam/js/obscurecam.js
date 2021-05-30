@@ -54,9 +54,12 @@ window.downloadImg = (el) => {
 };
 
 document.querySelector('.dm-share').addEventListener('click', () => {
+  const file = new File([canvas.toBlob()], "safetyfirst.jpg", {type: 'image/jpeg'});
+  const filesArray = [file];
+  
   webShare({
     title: `Obscure cam - resist.tools`,
     text: `Safely sharing a photo`,
-    files: [canvas.toDataURL('image/jpeg', 1.0)]
+    files: filesArray
   });
 })
