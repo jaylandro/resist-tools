@@ -19,8 +19,8 @@ function pixelateFaces() {
   tracking.track('#temp-image', tracker);
 
   tracker.on('track', function (event) {
-    if( event.data === undefined ) return;
-    
+    if (event.data === undefined) return;
+
     console.log('tracked', event.data)
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(tempImage, 0, 0);
@@ -54,12 +54,12 @@ window.downloadImg = (el) => {
   el.href = image;
 };
 
-document.querySelector('.dm-share').addEventListener('click', () => {
-  const file = new File([canvas.toBlob(() => console.log('done blobbing'))], "safetyfirst.jpg", {type: 'image/jpeg'});
-  
-  webShare({
-    title: `Privacy pix - resist.tools`,
-    text: `Safely sharing a photo`,
-    files: [file]
-  });
-})
+// document.querySelector('.dm-share').addEventListener('click', () => {
+//   const file = new File([canvas.toBlob(() => console.log('done blobbing'))], "safetyfirst.jpg", {type: 'image/jpeg'});
+
+//   webShare({
+//     title: `Privacy pix - resist.tools`,
+//     text: `Safely sharing a photo`,
+//     files: [file]
+//   });
+// })
